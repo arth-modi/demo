@@ -1,6 +1,12 @@
 {% extends "emp_register/base.html" %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-<p>Django crud operations</p>
+<form action="" method="post" autocomplete="off">
+    {% csrf_token %}
+    {{ form|crispy }}
+
+    <button type="submit" class="btn btn-success"><i class="fa-solid fa-database"></i>  Submit</button>
+</form>
 {% endblock content %}
 
