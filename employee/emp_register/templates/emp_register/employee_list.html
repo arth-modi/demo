@@ -7,6 +7,8 @@
             <td>Full Name</td>
             <td>Mobile</td>
             <td>Position</td>
+            <td>Email</td>
+            <td>Emp Code</td>
             <td>
                 <a href="{% url 'employee_insert' %}" class="btn btn-outline-success">Add New</a>
             </td>
@@ -18,6 +20,8 @@
                 <td>{{employee.fullname}}</td>
                 <td>{{employee.mobile}}</td>
                 <td>{{employee.position}}</td>
+                <td>{{employee.email}}</td>
+                <td>{{employee.emp_code}}</td>
                 <td>
                     <a href="{% url 'employee_update' employee.id %}" class="btn text-secondary px-0">
                         <i class="far fa-edit fa-lg"></i>
