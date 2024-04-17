@@ -1,4 +1,7 @@
+
 {% extends "emp_register/base.html" %}
+{% load cache %}
+{% cache 500 sample %}
 {% load crispy_forms_tags %}
 
 {% block content %}
@@ -17,4 +20,4 @@
     </div>
 </form>
 {% endblock content %}
-
+{% endcache %}

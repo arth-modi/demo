@@ -13,3 +13,6 @@ class Employee(models.Model):
     mobile = models.CharField(max_length=15)
     email = models.EmailField(max_length=50)
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
+    
+    class Meta:
+        indexes = [models.Index(fields=['fullname', 'emp_code', 'mobile','email', 'position'])]

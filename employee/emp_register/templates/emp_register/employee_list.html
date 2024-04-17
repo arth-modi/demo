@@ -1,5 +1,6 @@
 {% extends "emp_register/base.html" %}
-
+{% load cache %}
+{% cache 500 sample %}
 {% block content %}
 <table class="table table-borderless">
     <thead class="border-bottom font-weight-bold">
@@ -38,4 +39,6 @@
     </tbody>
 </table>
 {% endblock content %}
+{% endcache %}
+
 
