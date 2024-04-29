@@ -1,6 +1,6 @@
 {% extends "emp_register/base.html" %}
-{% load cache %}
-{% cache 500 sample %}
+{% comment %} {% load cache %}
+{% cache 500 sample1 %} {% endcomment %}
 {% block content %}
 <table class="table table-borderless">
     <thead class="border-bottom font-weight-bold">
@@ -24,9 +24,12 @@
                 <td>{{employee.email}}</td>
                 <td>{{employee.emp_code}}</td>
                 <td>
-                    <a href="{% url 'employee_update' employee.id %}" class="btn text-secondary px-0">
-                        <i class="far fa-edit fa-lg"></i>
-                    </a>
+                    <form action="{% url 'employee_update' employee.id %}" method="get" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn">
+                            <i class="far fa-edit fa-lg"></i>
+                        </button>
+                    </form>
                     <form action="{% url 'employee_delete' employee.id %}" method="post" class="d-inline">
                         {% csrf_token %}
                         <button type="submit" class="btn">
@@ -39,6 +42,6 @@
     </tbody>
 </table>
 {% endblock content %}
-{% endcache %}
+{% comment %} {% endcache %} {% endcomment %}
 
 
