@@ -1,7 +1,10 @@
 {% extends "emp_register/base.html" %}
+
 {% comment %} {% load cache %}
 {% cache 500 sample1 %} {% endcomment %}
 {% block content %}
+{% if user.is_authenticated %}
+
 <table class="table table-borderless">
     <thead class="border-bottom font-weight-bold">
         <tr>
@@ -41,6 +44,27 @@
         {% endfor %}
     </tbody>
 </table>
+
+{% else %}
+<div class="col-md-6 offset-md-3">
+<h1>Log In</h1>
+<br/>
+<form action="{% url 'employee_list'%}" method="post">
+    {% csrf_token %}
+    <form>
+        <div class="mb-3">
+          <input type="text" class="form-control" name="username" placeholder="Username" required>
+        </div>
+        <div class="mb-3">
+          <input type="password" class="form-control" name="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="btn btn-secondary">LogIn</button>
+    </form>
+
+</form>
+</div>
+{% endif %}
+
 {% endblock content %}
 {% comment %} {% endcache %} {% endcomment %}
 

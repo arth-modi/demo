@@ -6,9 +6,11 @@ import debug_toolbar
 
 urlpatterns = [
     path('__debug__/', include(debug_toolbar.urls)), 
-    path('list/', views.employee_list, name='employee_list'), 
+    path('', views.employee_list, name='employee_list'), 
     # path('object/cache/<int:object_id>/', cache_page(60 * 15)(views.employee_list)),
-    path('', views.employee_form, name='employee_insert'), 
+    path('insert/', views.employee_form, name='employee_insert'), 
+    path('logout/', views.logout_user, name='logout'),
+    path('register/', views.register_user, name='register'),
     # path('object/cache/<int:object_id>/', cache_page(60 * 15)(views.employee_form)),
     path('delete/<int:id>/', views.employee_delete, name='employee_delete'), 
     # path('object/cache/<int:object_id>/', cache_page(60 * 15)(views.employee_delete)),

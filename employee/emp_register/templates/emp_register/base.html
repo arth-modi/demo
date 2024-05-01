@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Register</title>\
+    <title>Employee Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
         rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
         crossorigin="anonymous">
@@ -12,7 +12,28 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    {% include "/home/arth_modi/demo/employee/emp_register/templates/emp_register/navbar.html" %}
     <div class="container">
+      <br/>
+        <div class="col-md-10 offset-md-1.mt-5">
+            <div class="jumbotron">
+                <h1 class="display-4">Employee Register</h1>
+                <p class="lead font-italic">Python Django project for implementing CRUD operations</p>
+                <hr class="my-4">
+            </div>
+        </div>
+      {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+      {% endif %}
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% comment %} <div class="container">
         <div class="col-md-10 offset-md-1.mt-5">
             <div class="jumbotron">
                 <h1 class="display-4">Employee Register</h1>
@@ -22,7 +43,7 @@
                 {% endblock content %}
             </div>
         </div>
-    </div>
+    </div> {% endcomment %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" 
         crossorigin="anonymous">

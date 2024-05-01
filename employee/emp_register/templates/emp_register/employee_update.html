@@ -3,12 +3,24 @@
 {% comment %} {% load cache %}
 {% cache 500 sample %} {% endcomment %}
 {% load crispy_forms_tags %}
-
+<div class="col-md-10 offset-md-1.mt-5">
+    <div class="jumbotron">
+        <h1 class="display-4">Employee Update</h1>
+        <p class="lead font-italic">Python Django project for implementing CRUD operations</p>
+        <hr class="my-4">
+    </div>
+</div>
 {% block content %}
+{% if user.is_authenticated %}
 <form action="" method="post" autocomplete="off">
     {% csrf_token %}
     {{ form|crispy }}
     <div class="row">
+        {% comment %} <div class="col-md-8">
+            <form action = "" method = "post">
+                <button class="btn btn-success btn-block btn-lg"><i class="fa-solid fa-database"></i>  Update</button>
+            <form>
+        </div> {% endcomment %}
         <div class="col-md-8">
             <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fa-solid fa-database"></i>  Update</button>
         </div>
@@ -19,5 +31,7 @@
         </div>
     </div>
 </form>
+{% endif %}
+
 {% endblock content %}
 {% comment %} {% endcache %} {% endcomment %}

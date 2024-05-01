@@ -1,18 +1,16 @@
 
 {% extends "emp_register/base.html" %}
-{% load cache %}
-{% cache 500 sample %}
+{% comment %} {% load cache %}
+{% cache 500 sample %} {% endcomment %}
 {% load crispy_forms_tags %}
 
 {% block content %}
-{% if user.is_authenticated %}
-
-<form action="" method="post" autocomplete="off">
+<form action="" method="delete" autocomplete="off">
     {% csrf_token %}
     {{ form|crispy }}
     <div class="row">
         <div class="col-md-8">
-            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fa-solid fa-database"></i>  Submit</button>
+            <a href="{% url 'employee_delete'%}" class="btn btn-success btn-block btn-lg"><i class="fa-solid fa-database"> Delete Record</i>
         </div>
         <div class="col-md-4">
             <a href="{% url 'employee_list'%}" class="btn btn-secondary btn-block btn-lg">
@@ -21,7 +19,5 @@
         </div>
     </div>
 </form>
-{% endif %}
-
 {% endblock content %}
-{% endcache %}
+{% comment %} {% endcache %} {% endcomment %}

@@ -1,7 +1,37 @@
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django import forms
 from .models import Employee
     
+class SignUpForm(UserCreationForm):
+    email = forms.EmailField(label="", widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Email Address'}))
+    first_name = forms.CharField(label="", max_length=50, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'First Name'}))
+    last_name = forms.CharField(label="", max_length=50, widget=forms.TextInput(attrs={'class':'form-control', 'placeholder':'Last Name'}))
+    
+    class Meta:
+        model = User
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1','password2' )
+        
+        def __init__(self, *args, **kwargs):
+            super(SignUpForm, self).__init__(*args, **kwargs)
+
+            self.fields['username'].widget.attrs['class'] = 'form-control'
+            self.fields['username'].widget.attrs['placeholder'] = 'User Name'
+            self.fields['username'].label = ''
+            self.fields['username'].help_text = '<span class="form-text text-muted"> <small> Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</small></span>'
+
+            self.fields['password1'].widget.attrs['class'] = 'form-control'
+            self.fields['password1'].widget.attrs['placeholder'] = 'Password'
+            self.fields['password1'].label = ''
+            self.fields['password1'].help_text = '<ul class="form-text text-muted small"><li>Your password can\'t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can\'t be a commonly used password.</li><li>Your password can\'t be entirely numeric.</li></ul>'
+
+            self.fields['password2'].widget.attrs['class'] = 'form-control'
+            self.fields['password2'].widget.attrs['placeholder'] = 'Confirm Password'
+            self.fields['password2'].label = ''
+            self.fields['password2'].help_text = '<span class="form-text text-muted"><small>Enter the same password as before, for verification.</small></span>'	
+
 class EmployeeForm(forms.ModelForm):
+    mobile = forms.CharField(required=False)
     
     class Meta:
         model = Employee
@@ -15,22 +45,25 @@ class EmployeeForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super(EmployeeForm, self).__init__(*args, **kwargs)
+        # self.helper = EmployeeForm()
+        # self.helper.disable_csrf = True
         self.fields['position'].empty_label = "Select"
         
         
-class EmployeeUpdate(forms.ModelForm):
-    emp_code = forms.CharField(disabled=True)
-    class Meta:
-        model = Employee
-        # fields = '__all__'
-        fields = ('fullname', 'emp_code','mobile', 'email', 'position')
+# class EmployeeUpdate(forms.ModelForm):
+#     emp_code = forms.CharField(disabled=True)
+#     mobile = forms.CharField(required=False)
+#     class Meta:
+#         model = Employee
+#         # fields = '__all__'
+#         fields = ('fullname', 'emp_code','mobile', 'email', 'position')
         
-        labels = {
-            'fullname':'Full Name',
-            'emp_code':'Emp Code',
-            'email':'Email',
-        }
+#         labels = {
+#             'fullname':'Full Name',
+#             'emp_code':'Emp Code',
+#             'email':'Email',
+#         }
         
-    def __init__(self, *args, **kwargs):
-        super(EmployeeUpdate, self).__init__(*args, **kwargs)
-        self.fields['position'].empty_label = "Select"
+#     def __init__(self, *args, **kwargs):
+#         super(EmployeeUpdate, self).__init__(*args, **kwargs)
+#         self.fields['position'].empty_label = "Select"
