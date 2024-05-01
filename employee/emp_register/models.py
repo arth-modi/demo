@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils.timezone import now
+
 
 # Create your models here.
 class Position(models.Model):
@@ -13,6 +15,7 @@ class Employee(models.Model):
     mobile = models.CharField(max_length=15)
     email = models.EmailField(max_length=50)
     position = models.ForeignKey(Position, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=now())
     
     # class Meta:
     #     indexes = [models.Index(fields=['fullname', 'emp_code', 'mobile','email', 'position'])]
